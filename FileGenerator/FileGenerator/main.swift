@@ -42,8 +42,10 @@ func getClassName(for `class`: Int, dep: Int) -> String {
     return getClassName(for: connectivity[`class`]![dep])
 }
 
-try? FileManager.default.createDirectory(atPath: "swift", withIntermediateDirectories: true, attributes: nil)
-try? FileManager.default.createDirectory(atPath: "objc", withIntermediateDirectories: true, attributes: nil)
+let realteiveDir = ProcessInfo.processInfo.arguments.count > 1 ? ProcessInfo.processInfo.arguments[1] : "."
+
+try? FileManager.default.createDirectory(atPath: realteiveDir + "/swift", withIntermediateDirectories: true, attributes: nil)
+try? FileManager.default.createDirectory(atPath: realteiveDir + "/objc", withIntermediateDirectories: true, attributes: nil)
 
 for i in 0..<FILES_COUNT {
 
@@ -69,7 +71,7 @@ for i in 0..<FILES_COUNT {
     }
     """
 
-    try contents.write(toFile: "swift/" + filename, atomically: true, encoding: .utf8)
+    try contents.write(toFile: realteiveDir + "/swift/" + filename, atomically: true, encoding: .utf8)
 
 
     // Objc
@@ -81,7 +83,7 @@ for i in 0..<FILES_COUNT {
     - (NSString *)printDependentItems;
     @end
     """
-    try headerContents.write(toFile: "objc/" + headerFile, atomically: true, encoding: .utf8)
+    try headerContents.write(toFile: realteiveDir + "/objc/" + headerFile, atomically: true, encoding: .utf8)
 
 
     let impFile = "\(className).m"
@@ -106,7 +108,7 @@ for i in 0..<FILES_COUNT {
     }
     @end
     """
-    try impContents.write(toFile: "objc/" + impFile, atomically: true, encoding: .utf8)
+    try impContents.write(toFile: realteiveDir + "/objc/" + impFile, atomically: true, encoding: .utf8)
 
 
 
