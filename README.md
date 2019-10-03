@@ -5,6 +5,6 @@ Generates some Swift and Objective Code. just to compare compilation time
 
 ## howto
 
-1. open FileGenerator Project
-2. Run it
-3. Run `xcode clean` and then `time xcodebuild` for each of Swift and ObjC project.
+1. cd FileGenerator Project
+2. Run `xcodedbuild`
+3. Run `build.sh` for each of Swift and ObjC project.
